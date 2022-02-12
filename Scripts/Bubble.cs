@@ -5,21 +5,21 @@ using UnityEngine;
 public class Bubble : MonoBehaviour
 {
     // Has
-    public GameObject myObject;
+    // hitpoints - bigger bubbles tend to have more hitpoints, but are worth less
+    public float speed = 1;
 
-
-    // Does
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        Debug.Log("Active Self: " + myObject.activeSelf);
-        Debug.Log("Active in Hierarchy " + myObject.activeInHierarchy);
-    }
-
-    // Update is called once per frame
     void Update()
     {
-        
+        Debug.Log("I'm a bubble!");
+        transform.position += transform.up * speed * Time.deltaTime;
+    }
+
+    public void SetColor(Color c) {        
+        transform.GetComponentInChildren<MeshRenderer>().material.color = c;
+    }
+
+    public void SetScale(float f) {
+        transform.GetComponentInChildren<Transform>().localScale = new Vector3(f, f, f);
+        speed += 1 - f;
     }
 }
